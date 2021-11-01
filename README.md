@@ -1,5 +1,7 @@
 # ESP-NOW-RC-CAR
 
+##硬體
+
 ### 材料
 
 | 品名                      |  數量  |
@@ -35,3 +37,30 @@
 
 ### 接收端
 ![image](img/romote.jpg)
+
+## 軟體
+
+### 取得 MAC Address
+
+``` cpp
+#include <WiFi.h>
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println();
+#ifdef ESP8266
+  Serial.print("ESP8266 Board MAC Address:  ");
+  Serial.println(WiFi.macAddress());
+#elif defined ESP32
+  WiFi.mode(WIFI_MODE_STA);
+  Serial.print("ESP32 Board MAC Address:  ");
+  Serial.println(WiFi.macAddress());
+#endif
+}
+```
+
+將 MAC Address = `[]:[]:[]:[]:[]:[]` 填入控制端
+
+``` cpp
+uint8_t broadcastAddress[] = {0x[], 0x[], 0x[], 0x[], 0x[], 0x[]};
+```
