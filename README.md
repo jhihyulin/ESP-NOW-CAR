@@ -4,32 +4,32 @@
 
 ### 材料
 
-| 品名                      |   數量   |               圖片                 |
-| --------                  |-------- |           --------                 |
-| ESP-32                    |   2     | ![img](img/NodeMCU-32S.jpg)        |
-| 雙軸搖桿                   |   2     | ![img](img/joystick.jpg)           |
-| L298N OR MX1508           |   2     | ![img](img/MX1508.jpg)             |
-| 18650電池                  |   1    | ![img](img/18650-battery.jpg)       |
-| 18650電池盒                |   1     | ![img](img/18650-battery-case.jpg) |
-| 按鍵開關                   |   5     | ![img](img/button-switch.jpg)
-| 滑動開關                   |   2     | ![img](img/slide-switch.jpg)
-| AMS1117-3.3V穩壓模組       |   2     | ![img](img/AMS1117-3.3V.jpg)
-| TP4056鋰電池充電板模組      |   1     | ![img](img/)
-| 白色LED                    |   few   | ![img](img/)
-| 紅色LED                    |   few   | ![img](img/)
-| 黃色LED                    |   few   | ![img](img/)
-| 200Ω電阻                   |   few   |
-| 5\*7cm洞洞板               |   1   |
-| 7\*9cm洞洞板               |   2   |
-| 排針                       |   few   |
-| 排母                       |   few   | ![img](img/pin-header.jpg)
-| 接線端子                   |   3   |
-| 11\*11\*5mm鋁散熱片        |   2   |
-| ipex天線                   |   2   |
-| 2cm銅柱                    |   few   |
-| M3螺絲                     |   few   |
-| M3螺母                     |   few   |
-| 導線                       |   few   |
+| 品名                      |    數量    |                 圖片                  |
+| ------------------------- | :--------: | :----------------------------------: |
+| ESP-32                    |    2     | ![img](img/NodeMCU-32S.jpg)            |
+| 雙軸搖桿                   |    2     | ![img](img/joystick.jpg)               |
+| L298N OR MX1508           |    2     | ![img](img/MX1508.jpg)                 |
+| 18650電池                  |    1    | ![img](img/18650-battery.jpg)           |
+| 18650電池盒                |    1     | ![img](img/18650-battery-case.jpg)     |
+| 按鍵開關                   |    5     | ![img](img/button-switch.jpg)          |
+| 滑動開關                   |    2     | ![img](img/slide-switch.jpg)           |
+| AMS1117-3.3V穩壓模組       |    2     | ![img](img/AMS1117-3.3V.jpg)           |
+| TP4056鋰電池充電板模組      |    1     | ![img](img/TP4056.jpg)                 |
+| 白色LED                    |    few   | ![img](img/)
+| 紅色LED                    |    few   | ![img](img/)
+| 黃色LED                    |    few   | ![img](img/)
+| 200Ω電阻                   |    few   | ![img](img/)
+| 5\*7cm洞洞板               |     1    | ![img](img/)
+| 7\*9cm洞洞板               |     2    | ![img](img/)
+| 排針                       |    few   | ![img](img/)
+| 排母                       |    few   | ![img](img/pin-header.jpg)             |
+| 接線端子                   |     3    | ![img](img/)
+| 11\*11\*5mm鋁散熱片        |     2    | ![img](img/)
+| ipex天線                   |     2    | ![img](img/)
+| 2cm銅柱                    |    few   | ![img](img/)
+| M3螺絲                     |    few   | ![img](img/)
+| M3螺母                     |    few   | ![img](img/)
+| 導線                       |    few   | ![img](img/)
 
 ### 控制端
 ![image](img/control_top.jpg)
