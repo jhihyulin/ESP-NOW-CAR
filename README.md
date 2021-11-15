@@ -8,7 +8,7 @@
 | ------------------------- | :--------: | :----------------------------------: |
 | ESP-32                    |    2     | ![img](img/NodeMCU-32S.jpg)            |
 | 雙軸搖桿                   |    2     | ![img](img/joystick.jpg)               |
-| L298N OR MX1508           |    2     | ![img](img/MX1508.jpg)                 |
+| L298N OR MX1508           |    2     | ![img](img/MX1508.jpg)                  |
 | 18650電池                  |    1    | ![img](img/18650-battery.jpg)           |
 | 18650電池盒                |    1     | ![img](img/18650-battery-case.jpg)     |
 | 按鍵開關                   |    5     | ![img](img/button-switch.jpg)          |
@@ -18,12 +18,12 @@
 | 白色LED                    |    few   | ![img](img/)
 | 紅色LED                    |    few   | ![img](img/)
 | 黃色LED                    |    few   | ![img](img/)
-| 200Ω電阻                   |    few   | ![img](img/)
-| 5\*7cm洞洞板               |     1    | ![img](img/)
-| 7\*9cm洞洞板               |     2    | ![img](img/)
-| 排針                       |    few   | ![img](img/)
-| 排母                       |    few   | ![img](img/pin-header.jpg)             |
-| 接線端子                   |     3    | ![img](img/)
+| 200Ω電阻                   |    few   | ![img](img/resistance-200Ω.jpg)        |
+| 5\*7cm洞洞板               |     1    | ![img](img/stripboard-5X7cm.jpg)        |
+| 7\*9cm洞洞板               |     2    | ![img](img/stripboard-7X9cm.jpg)        |
+| 排針                       |    few   | ![img](img/pin-header.jpg)
+| 排母                       |    few   | ![img](img/female-header.jpg)          |
+| 接線端子                   |     3    | ![img](img/KF301-2P.jpg)               |
 | 11\*11\*5mm鋁散熱片        |     2    | ![img](img/)
 | ipex天線                   |     2    | ![img](img/)
 | 2cm銅柱                    |    few   | ![img](img/)
