@@ -12,7 +12,7 @@
 | 18650電池                  |   1    | ![img](img/18650-battery.jpg)       |
 | 18650電池盒                |   1     | ![img](img/18650-battery-case.jpg) |
 | 按鍵開關                   |   5     | ![img](img/button-switch.jpg)
-| 滑動開關                   |   2     | ![img](img/)
+| 滑動開關                   |   2     | ![img](img/slide-switch.jpg)
 | AMS1117-3.3V穩壓模組       |   2     | ![img](img/AMS1117-3.3V.jpg)
 | TP4056鋰電池充電板模組      |   1     | ![img](img/)
 | 白色LED                    |   few   | ![img](img/)
@@ -22,6 +22,7 @@
 | 5\*7cm洞洞板               |   1   |
 | 7\*9cm洞洞板               |   2   |
 | 排針                       |   few   |
+| 排母                       |   few   | ![img](img/pin-header.jpg)
 | 接線端子                   |   3   |
 | 11\*11\*5mm鋁散熱片        |   2   |
 | ipex天線                   |   2   |
