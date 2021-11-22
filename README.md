@@ -60,7 +60,7 @@ void setup() {
 }
 ```
 
-將 MAC Address = `[]:[]:[]:[]:[]:[]` 填入控制端
+將 MAC Address = `[]:[]:[]:[]:[]:[]` 填入[/control/control.ino](/control/control.ino)內的第26行
 
 ``` cpp
 uint8_t broadcastAddress[] = {0x[], 0x[], 0x[], 0x[], 0x[], 0x[]};
