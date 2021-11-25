@@ -24,7 +24,7 @@
 | 排針                       |    few   | ![img](img/pin-header.jpg)
 | 排母                       |    few   | ![img](img/female-header.jpg)          |
 | 接線端子                   |     3    | ![img](img/KF301-2P.jpg)               |
-| 11\*11\*5mm鋁散熱片        |     2    | ![img](img/)
+| 11\*11\*5mm鋁散熱片        |     2    | ![img](img/alimnum_radiator.jpg)
 | ipex天線                   |     2    | ![img](img/)
 | 2cm銅柱                    |    few   | ![img](img/)
 | M3螺絲                     |    few   | ![img](img/)
