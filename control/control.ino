@@ -1,27 +1,49 @@
 #include <WiFi.h>
 #include <esp_now.h>
 #include "esp32-hal-cpu.h"
+#include <Bounce2.h>
 
-const int JoyStick_X_pin = 32;
-const int JoyStick_Y_pin = 33;
-const int switch_1_pin = 25;
-const int switch_2_pin = 25;
-const int switch_3_pin = 25;
+const int SERIAL_BAUDRATE = 115200;
 
-int JoyStick_X, JoyStick_Y, switch_1, switch_2, switch_3;
+const int button_1_pin = 35;
+const int button_2_pin = 32;
+const int button_3_pin = 33;
+const int button_4_pin = 25;
+const int button_5_pin = 26;
+
+Bounce button_1_bouncer = Bounce();
+Bounce button_2_bouncer = Bounce();
+Bounce button_3_bouncer = Bounce();
+Bounce button_4_bouncer = Bounce();
+Bounce button_5_bouncer = Bounce();
+
+const int JoyStick_1_X_pin = 36;
+const int JoyStick_1_Y_pin = 39;
+const int JoyStick_1_button_pin = 34;
+
+const int JoyStick_2_X_pin = 12;
+const int JoyStick_2_Y_pin = 14;
+const int JoyStick_2_button_pin = 27;
+
+int JoyStick_X, JoyStick_Y;
+
+boolean headlight_status,brakelight_status,foglight_status,turn_left_light_status,turn_right_light_status,guard_light_status;
 
 typedef struct struct_message {
   String board_name;
   int FB;
   int LR;
-  boolean switch_headlight;
-  boolean switch_brakelight;
-  boolean switch_foglight;
+  boolean headlight_status;
+  boolean brakelight_status;
+  boolean foglight_status;
+  boolean turn_left_light_status;
+  boolean turn_right_light_status;
+  boolean guard_light_status;
 } struct_message;
 
 struct_message myData;
 
-
+//-------------------------ESP_NOW SET START-------------------------
 // 接收裝置的 MAC 地址
 uint8_t broadcastAddress[] = {0xE0, 0xE2, 0xE6, 0xD1, 0x91, 0xD4};
 
@@ -35,9 +57,11 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
   Serial.println();
 }
+//-------------------------ESP_NOW SET END-------------------------
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(SERIAL_BAUDRATE);
+  //---------------ESP_NOW SET START---------------
   // 初始化 ESP-NOW
   WiFi.mode(WIFI_STA);
   if (esp_now_init() != ESP_OK) {
@@ -56,22 +80,51 @@ void setup() {
     Serial.println("Failed to add peer");
     return;
   }
+  //---------------ESP_NOW SET END---------------
 
-  pinMode(JoyStick_X_pin, INPUT);
-  pinMode(JoyStick_Y_pin, INPUT);
-  pinMode(switch_1_pin, INPUT_PULLUP);
-  pinMode(switch_2_pin, INPUT_PULLUP);
-  pinMode(switch_3_pin, INPUT_PULLUP);
+  pinMode(JoyStick_1_X_pin, INPUT);
+  pinMode(JoyStick_2_Y_pin, INPUT);
 
+  pinMode(button_1_pin, INPUT_PULLDOWN);
+  pinMode(button_2_pin, INPUT_PULLDOWN);
+  pinMode(button_3_pin, INPUT_PULLDOWN);
+  pinMode(button_4_pin, INPUT_PULLDOWN);
+  pinMode(button_5_pin, INPUT_PULLDOWN);
+
+  button_1_bouncer.attach(button_1_pin);
+  button_1_bouncer.interval(5);
+  button_2_bouncer.attach(button_2_pin);
+  button_2_bouncer.interval(5);
+  button_3_bouncer.attach(button_3_pin);
+  button_3_bouncer.interval(5);
+  button_4_bouncer.attach(button_4_pin);
+  button_4_bouncer.interval(5);
+  button_5_bouncer.attach(button_5_pin);
+  button_5_bouncer.interval(5);
+
+  //CPU_80MHz
   setCpuFrequencyMhz(80);
 }
 
 void loop() {
-  switch_1 = digitalRead(switch_1_pin);
-  switch_2 = digitalRead(switch_2_pin);
-  switch_3 = digitalRead(switch_3_pin);
+  if(button_1_bouncer.update() == true && button_1_bouncer.read() == HIGH){
+    headlight_status = !headlight_status;
+    brakelight_status = headlight_status;
+  }
+  if(button_2_bouncer.update() == true && button_2_bouncer.read() == HIGH){
+    foglight_status = !foglight_status;
+  }
+  if(button_3_bouncer.update() == true && button_3_bouncer.read() == HIGH){
+    turn_left_light_status = !turn_left_light_status;
+  }
+  if(button_4_bouncer.update() == true && button_4_bouncer.read() == HIGH){
+    turn_right_light_status = !turn_right_light_status;
+  }
+  if(button_5_bouncer.update() == true && button_5_bouncer.read() == HIGH){
+    guard_light_status = !guard_light_status;
+  }
 
-  JoyStick_X = analogRead(JoyStick_X_pin);
+  JoyStick_X = analogRead(JoyStick_1_X_pin);
   int FB = 0;
   if (JoyStick_X >= 2200) {
     FB = 1;
@@ -81,7 +134,7 @@ void loop() {
     FB = -1;
   }
 
-  JoyStick_Y = analogRead(JoyStick_Y_pin);
+  JoyStick_Y = analogRead(JoyStick_2_Y_pin);
   int LR = 0;
   if (JoyStick_Y >= 2300) {
     LR = 1;
@@ -91,51 +144,16 @@ void loop() {
     LR = -1;
   }
 
-  boolean switch_headlight = false;
-  if (switch_1 == HIGH) {
-    switch_headlight = true;
-  } else if (switch_1 == LOW) {
-    switch_headlight = false;
-  }
-
-  boolean switch_brakelight = false;
-  if (switch_2 == HIGH) {
-    switch_brakelight = true;
-  } else if (switch_2 == LOW) {
-    switch_brakelight = false;
-  }
-
-  boolean switch_foglight = false;
-  if (switch_3 == HIGH) {
-    switch_foglight = true;
-  } else if (switch_3 == LOW) {
-    switch_foglight = false;
-  }
-
   // 設定要傳送的資料
   myData.board_name = "board_N2";
   myData.FB = FB;
   myData.LR = LR;
-  myData.switch_headlight = switch_headlight;
-  myData.switch_brakelight = switch_brakelight;
-  myData.switch_foglight = switch_foglight;
-  Serial.print(JoyStick_X, DEC);
-  Serial.print("|");
-  Serial.print(JoyStick_Y, DEC);
-  Serial.print("|");
-  Serial.print("F+B->>");
-  Serial.print(FB, DEC);
-  Serial.print("|");
-  Serial.print("L+R->>");
-  Serial.print(LR, DEC);
-  Serial.print("|");
-  Serial.print("headlight>>");
-  Serial.print(switch_headlight, DEC);
-  Serial.print("brakelight>>");
-  Serial.print(switch_brakelight, DEC);
-  Serial.print("foglight>>");
-  Serial.print(switch_foglight, DEC);
-  Serial.println();
+  myData.headlight_status = headlight_status;
+  myData.brakelight_status = brakelight_status;
+  myData.foglight_status = foglight_status;
+  myData.turn_left_light_status = turn_left_light_status;
+  myData.turn_right_light_status = turn_right_light_status;
+  myData.guard_light_status = guard_light_status;
 
   // 傳送資料
   esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
@@ -147,5 +165,4 @@ void loop() {
   else {
     Serial.println("Error sending the data");
   }
-  delay(20);
 }
