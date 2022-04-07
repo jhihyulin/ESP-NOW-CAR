@@ -1,5 +1,5 @@
 #define BAUDRATE 115200  //setup baudrate
-#define PERIOD 500
+#define DELAYTIME 500
 //------------------------- pin setup START -------------------------
 #define m11 32
 #define m12 33
@@ -152,7 +152,7 @@ void loop() {
   if (myData.guard_light_status == true) {
     current_millis = millis();
     Serial.println("guard_light_on");
-    if (current_millis - guard_light_time >= PERIOD) {                
+    if (current_millis - guard_light_time >= DELAYTIME) {                
         guard_light_status = !guard_light_status;
         digitalWrite(turn_left_light_pin, guard_light_status);
         digitalWrite(turn_right_light_pin, guard_light_status);
@@ -162,7 +162,7 @@ void loop() {
     current_millis = millis();
     if (myData.turn_left_light_status == true) {
       Serial.println("turn_left_light_on");
-      if (current_millis - turn_left_light_time >= PERIOD) {                
+      if (current_millis - turn_left_light_time >= DELAYTIME) {                
         turn_left_light_status = !turn_left_light_status;
         digitalWrite(turn_left_light_pin, turn_left_light_status);
         turn_left_light_time = current_millis;
@@ -175,7 +175,7 @@ void loop() {
     current_millis = millis();
     if (myData.turn_right_light_status == true) {
       Serial.println("turn_right_light_on");
-      if (current_millis - turn_right_light_time >= PERIOD) {                
+      if (current_millis - turn_right_light_time >= DELAYTIME) {                
         turn_right_light_status = !turn_right_light_status;
         digitalWrite(turn_right_light_pin, turn_right_light_status);
         turn_right_light_time = current_millis;

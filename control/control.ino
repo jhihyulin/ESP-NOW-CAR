@@ -1,4 +1,4 @@
-#define DELAYTIME 500   //set delay time
+#define DELAYTIME 40   //set delay time
 #define BAUDRATE 115200  //setup baudrate
 #define CONTROL_BOARD_NAME "board_N2"
 //------------------------- pin setup START -------------------------
