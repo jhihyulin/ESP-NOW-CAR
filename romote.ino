@@ -1,21 +1,22 @@
+#define BAUDRATE 115200  //setup baudrate
+#define PERIOD 500
+//------------------------- pin setup START -------------------------
+#define m11 32
+#define m12 33
+#define m21 26
+#define m22 27
+
+#define headlight_pin 23
+#define brakelight_pin 22
+#define foglight_pin 21
+#define turn_left_light_pin 19
+#define turn_right_light_pin 18
+//------------------------- pin setup START -------------------------
+
 #include <WiFi.h>
 #include <esp_now.h>
 #include "esp32-hal-cpu.h"
 
-const int SERIAL_BAUDRATE = 115200;
-
-const int PERIOD = 500;
-
-const int m11 = 32;
-const int m12 = 33;
-const int m21 = 26;
-const int m22 = 27;
-
-const int headlight_pin = 23;
-const int brakelight_pin = 22;
-const int foglight_pin = 21;
-const int turn_left_light_pin = 19;
-const int turn_right_light_pin = 18;
 
 boolean turn_left_light_status, turn_right_light_status,guard_light_status;
 
@@ -43,7 +44,7 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 }
 
 void setup() {
-  Serial.begin(SERIAL_BAUDRATE);
+  Serial.begin(BAUDRATE);
   // 初始化 ESP-NOW
   WiFi.mode(WIFI_STA);
   if (esp_now_init() != 0) {
