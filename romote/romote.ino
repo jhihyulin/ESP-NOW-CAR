@@ -1,6 +1,6 @@
 #define BAUDRATE 115200  //setup baudrate
 #define DELAYTIME 500
-#define CPU_FEQUENCY_MHZ 240
+#define CPU_FEQUENCY_MHZ 80
 //------------------------- pin setup START -------------------------
 #define m11 32
 #define m12 33
