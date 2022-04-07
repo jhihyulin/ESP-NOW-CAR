@@ -1,5 +1,6 @@
 #define BAUDRATE 115200  //setup baudrate
 #define DELAYTIME 500
+#define CPU_FEQUENCY_MHZ 240
 //------------------------- pin setup START -------------------------
 #define m11 32
 #define m12 33
@@ -23,6 +24,7 @@ boolean turn_left_light_status, turn_right_light_status,guard_light_status;
 long long int turn_left_light_time, turn_right_light_time,guard_light_time;
 long long int current_millis;
 
+//------------------------- setup esp_now data type START --------------------
 typedef struct struct_message {
   String board_name;
   int FB;
@@ -34,26 +36,28 @@ typedef struct struct_message {
   boolean turn_right_light_status;
   boolean guard_light_status;
 } struct_message;
-
 struct_message myData;
+//------------------------- setup esp_now data type END --------------------
 
-
-// 資料接收回調函式
+//-------------------------ESP_NOW SET START-------------------------
+// 資料接收回撥函式
 void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   memcpy(&myData, incomingData, sizeof(myData));
 }
+//-------------------------ESP_NOW SET END-------------------------
 
 void setup() {
   Serial.begin(BAUDRATE);
+  //---------------ESP_NOW SET START---------------
   // 初始化 ESP-NOW
-  WiFi.mode(WIFI_STA);
+  WiFi.mode(WIFI_MODE_STA);
   if (esp_now_init() != 0) {
     Serial.println("Error initializing ESP-NOW");
     return;
   }
-  
   // 設定接收資料回撥函式
   esp_now_register_recv_cb(OnDataRecv);
+  //---------------ESP_NOW SET END---------------
 
   pinMode(m11, OUTPUT);
   pinMode(m12, OUTPUT);
@@ -67,7 +71,8 @@ void setup() {
   pinMode(turn_left_light_pin, OUTPUT);
   pinMode(turn_right_light_pin, OUTPUT);
 
-  setCpuFrequencyMhz(80);
+  //CPU_80MHz
+  setCpuFrequencyMhz(CPU_FEQUENCY_MHZ);
 }
 
 void loop() {

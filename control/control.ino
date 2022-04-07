@@ -1,6 +1,7 @@
 #define DELAYTIME 40   //set delay time
 #define BAUDRATE 115200  //setup baudrate
 #define CONTROL_BOARD_NAME "board_N2"
+#define CPU_FEQUENCY_MHZ 240
 //------------------------- pin setup START -------------------------
 #define button_1_pin 35
 #define button_2_pin 32
@@ -38,6 +39,7 @@ int JoyStick_X, JoyStick_Y;
 
 boolean headlight_status,brakelight_status,foglight_status,turn_left_light_status,turn_right_light_status,guard_light_status;
 
+//------------------------- setup esp_now data type START --------------------
 typedef struct struct_message {
   String board_name;
   int FB;
@@ -49,8 +51,8 @@ typedef struct struct_message {
   boolean turn_right_light_status;
   boolean guard_light_status;
 } struct_message;
-
 struct_message myData;
+//------------------------- setup esp_now data type END --------------------
 
 //-------------------------ESP_NOW SET START-------------------------
 // 資料傳送回撥函式
@@ -69,7 +71,7 @@ void setup() {
   Serial.begin(BAUDRATE);
   //---------------ESP_NOW SET START---------------
   // 初始化 ESP-NOW
-  WiFi.mode(WIFI_STA);
+  WiFi.mode(WIFI_MODE_STA);
   if (esp_now_init() != ESP_OK) {
     Serial.println("Error initializing ESP-NOW");
     return;
@@ -98,18 +100,18 @@ void setup() {
   pinMode(button_5_pin, INPUT_PULLUP);
 
   button_1_bouncer.attach(button_1_pin);
-  button_1_bouncer.interval(5);
+  button_1_bouncer.interval(DELAYTIME);
   button_2_bouncer.attach(button_2_pin);
-  button_2_bouncer.interval(5);
+  button_2_bouncer.interval(DELAYTIME);
   button_3_bouncer.attach(button_3_pin);
-  button_3_bouncer.interval(5);
+  button_3_bouncer.interval(DELAYTIME);
   button_4_bouncer.attach(button_4_pin);
-  button_4_bouncer.interval(5);
+  button_4_bouncer.interval(DELAYTIME);
   button_5_bouncer.attach(button_5_pin);
-  button_5_bouncer.interval(5);
+  button_5_bouncer.interval(DELAYTIME);
 
   //CPU_80MHz
-  //setCpuFrequencyMhz(80);
+  setCpuFrequencyMhz(CPU_FEQUENCY_MHZ);
 }
 
 void loop() {
